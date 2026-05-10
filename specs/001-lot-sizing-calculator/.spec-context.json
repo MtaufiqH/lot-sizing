@@ -1,0 +1,15 @@
+{
+  "workflow": "speckit",
+  "specName": "001-lot-sizing-calculator",
+  "branch": "001-lot-sizing-calculator",
+  "selectedAt": "2026-05-10T13:40:41.119Z",
+  "currentStep": "specify",
+  "status": "draft",
+  "stepHistory": {
+    "specify": {
+      "startedAt": "2026-05-10T13:43:43.280Z",
+      "completedAt": null
+    }
+  },
+  "transitions": []
+}

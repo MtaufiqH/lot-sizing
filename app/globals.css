@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dark trading terminal palette */
+  --color-bg: #0d1117;
+  --color-surface: #161b22;
+  --color-surface-raised: #21262d;
+  --color-surface-high: #2d333b;
+  --color-border: #30363d;
+  --color-border-subtle: #21262d;
+
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-muted: #484f58;
+
+  --color-accent: #58a6ff;
+  --color-accent-subtle: #1f3a5c;
+
+  --color-green: #3fb950;
+  --color-green-subtle: #0d2a14;
+  --color-green-border: #196c2e;
+
+  --color-red: #f85149;
+  --color-red-subtle: #2d0f0e;
+  --color-red-border: #6e2820;
+
+  --color-amber: #d29922;
+  --color-amber-subtle: #2e1f00;
+
+  /* Risk preset colors */
+  --color-preset-pemula: #22c55e;
+  --color-preset-pemula-bg: #052e16;
+  --color-preset-standard: #58a6ff;
+  --color-preset-standard-bg: #0d2a4a;
+  --color-preset-agresif: #f59e0b;
+  --color-preset-agresif-bg: #2d1a00;
+  --color-preset-risky: #f85149;
+  --color-preset-risky-bg: #2d0f0e;
+
+  /* Fonts */
+  --font-inter: var(--font-inter-var), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-var), ui-monospace, "JetBrains Mono", monospace;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+:root {
+  --font-inter-var: '';
+  --font-jetbrains-var: '';
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
