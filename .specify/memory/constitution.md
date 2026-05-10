@@ -1,50 +1,72 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version change: [UNVERSIONED] → 1.0.0
+Principles added:
+  - I. Calculation Accuracy (new)
+  - II. Simplicity (new)
+  - III. Web-First Delivery (new)
+  - IV. No Automated Testing (new)
+Sections added:
+  - Technology Constraints
+  - Development Workflow
+Sections removed: N/A
+Templates updated:
+  - .specify/templates/plan-template.md ✅ updated (removed test dirs, updated Testing field guidance)
+  - .specify/templates/tasks-template.md ✅ updated (testing tasks marked excluded)
+  - .specify/templates/spec-template.md ✅ reviewed (no changes needed; "Independent Test" = manual verification)
+Follow-up TODOs: None
+-->
+
+# Lot Sizing Calculator Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Calculation Accuracy
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Every lot sizing formula MUST produce mathematically correct results. Inputs MUST be validated at the UI boundary (numeric, positive, within domain range). Invalid inputs MUST surface a clear inline error and block calculation. No calculation may silently produce a wrong result or NaN.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Rationale**: This is a trade tool. Incorrect lot sizes cost real money.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Simplicity
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+The implementation MUST be the minimal code that satisfies requirements. No abstractions, libraries, or patterns beyond what the feature demands. YAGNI is law. Every added dependency MUST have explicit justification tied to a functional requirement.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Minimum bare requirement scope. Complexity compounds maintenance cost with no trade benefit.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Web-First Delivery
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+The tool MUST run entirely in the browser as a static web page. No backend server, no database, no authentication required. A single `index.html` (with optional co-located JS/CSS) MUST be the deployable artifact.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Rationale**: Trade tools need fast, zero-friction access. No login, no install, no server dependency.
+
+### IV. No Automated Testing
+
+Automated testing (unit, integration, end-to-end) is EXPLICITLY EXCLUDED from this project. Verification happens through manual browser review. Acceptance scenarios in specs serve as manual verification checklists, not automated test specs.
+
+**Rationale**: User requirement — zero testing overhead for minimum viable tool.
+
+## Technology Constraints
+
+- **Stack**: HTML5, CSS3, vanilla JavaScript (ES2020+) OR a single lightweight framework (e.g., React via CDN, Vue via CDN) — no build toolchain required unless explicitly chosen.
+- **No build step by default**: The project MUST work by opening `index.html` directly in a browser OR via a simple static file server.
+- **No test files**: Do not create any `*.test.*`, `*.spec.*`, `__tests__/`, `cypress/`, or similar test artifacts.
+- **No test dependencies**: Do not add Jest, Vitest, Cypress, Playwright, or any testing library to the project.
+
+## Development Workflow
+
+- **Manual verification**: After each implementation task, open the browser and manually verify the acceptance scenarios defined in `spec.md`.
+- **Single deployable**: All implementation MUST converge to a static artifact deployable on any static host (GitHub Pages, Vercel, Netlify, or local file system).
+- **Commit discipline**: Commit after each completed task. Commit messages MUST reference the task ID (e.g., `feat: implement EOQ calculator [T003]`).
+- **No CI testing gates**: CI (if configured) MUST NOT run test suites. Only lint or build checks are permitted.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other practices for this project. Amendments require:
+1. Update `constitution.md` with version bump per semantic versioning rules.
+2. Update dependent templates if principles change.
+3. Document reason for amendment in the Sync Impact Report comment.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+All implementation plans MUST include a Constitution Check gate verifying compliance with principles I–IV before Phase 0 begins.
+
+**Version**: 1.0.0 | **Ratified**: 2026-05-10 | **Last Amended**: 2026-05-10
